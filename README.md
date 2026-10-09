@@ -68,10 +68,34 @@ For example, when a user creates a task:
 * taskmanager_db — the database we created.* 
 
 
+**Why use enums instead of strings?**
 
+An enum restricts a field to a defined set of values. For example, task status cannot accidentally become "COMPLETEED" because of a spelling mistake.
 
+###### **Notice that id and createdAt don't have public setters.** The database generates the ID, and the @PrePersist method sets the creation timestamp when a new entity is persisted.
 
+## Understand the important annotations
 
+ **@Entity**
+Marks Task as a JPA entity that Hibernate can persist.
+
+**@Table(name = "tasks")**
+Specifies the database table name as tasks.
+
+**@Id**
+Marks id as the entity's primary key.
+
+**@GeneratedValue**
+Configures automatic ID generation. IDENTITY uses the database's identity-generation mechanism.
+
+ **@Column**
+Configures column properties, such as nullability and length.
+
+ **@Enumerated(EnumType.STRING)**
+Stores enum names such as IN_PROGRESS instead of ordinal numbers such as 1.
+
+ **@PrePersist**
+Runs the annotated callback before a new entity is inserted into the database.
 
 
 
