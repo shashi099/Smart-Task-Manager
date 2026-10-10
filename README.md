@@ -98,6 +98,23 @@ Stores enum names such as IN_PROGRESS instead of ordinal numbers such as 1.
 Runs the annotated callback before a new entity is inserted into the database.
 
 
+## Repository in Spring Boot?
+A Repository is a component responsible for data-access operations. In our application, it will help us save, retrieve, update, and delete tasks in PostgreSQL.
 
+`extends JpaRepository<Task, Long>`
+This is the most important line.
+JpaRepository provides many ready-made methods for database operations.
+- Task — the entity this repository manages.
+- Long — the Java type of the entity's primary key (id).
 
+  Because our Task entity has a Long id, we use JpaRepository<Task, Long>.
 
+### **Method	Purpose**
+
+* **save(task)** -	Saves a new task or updates an existing entity
+* **findById(id)** -	Finds a task by its ID
+* **findAll()**	- Retrieves all tasks
+* **existsById(id)** -	Checks whether a task exists
+* **deleteById(id)** -	Deletes a task by ID
+* **count()** -	Returns the number of records
+* **findAll(Pageable)** -	Retrieves a page of records
