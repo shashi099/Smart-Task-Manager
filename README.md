@@ -118,3 +118,46 @@ JpaRepository provides many ready-made methods for database operations.
 * **deleteById(id)** -	Deletes a task by ID
 * **count()** -	Returns the number of records
 * **findAll(Pageable)** -	Retrieves a page of records
+
+
+# Create the Task Service Layer
+we created TaskRepository, which handles database operations. Now we'll create TaskService, which will contain our application's business logic.
+~~~~
+React Frontend
+User submits a task
+    👇
+Controller
+Receives the HTTP request
+    👇
+TaskService
+Business rules and application logic
+    👇
+TaskRepository
+Database operations
+    👇
+PostgreSQL
+~~~~
+
+**`What is the purpose of the Service layer in Spring Boot?`**
+
+_The Service layer contains business logic and coordinates operations between the Controller and Repository. It separates application rules from HTTP handling and database access, improving maintainability and testability_.
+
+#### Let's understand the code
+
+##### A. @Service
+
+This annotation tells Spring that TaskService is a service-layer component. Spring discovers it during component scanning and manages its lifecycle as a bean.
+
+##### B. `private final TaskRepository taskRepository`
+This declares a dependency on TaskRepository.
+- **private** restricts direct access from outside the class.
+- **final** means the field must be assigned once and cannot later be reassigned.
+- **TaskRepository** provides the database operations our Service needs.
+
+##### C. Constructor injection
+`public TaskService(TaskRepository taskRepository) {
+this.taskRepository = taskRepository;
+}`
+
+Spring provides the TaskRepository bean when creating TaskService.
+Because this class has one constructor, Spring does not require an explicit @Autowired annotation on it.
