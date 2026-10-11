@@ -161,3 +161,44 @@ this.taskRepository = taskRepository;
 
 Spring provides the TaskRepository bean when creating TaskService.
 Because this class has one constructor, Spring does not require an explicit @Autowired annotation on it.
+
+# Spring Boot applications: DTO (Data Transfer Object).
+DTOs help us control exactly what clients can send and receive.
+~~~~
+React Frontend
+Sends task data as JSON
+    👇
+CreateTaskRequest DTO
+Defines permitted input fields
+    👇
+TaskService → Task Entity
+Applies business logic and persistence
+    👇
+TaskResponse DTO
+Defines the data returned to the client 
+~~~~
+
+**We have used `Java records` for these DTOs. Records provide a concise way to declare 
+data-carrying types, with generated accessors, a constructor, and other standard methods.**
+
+## Create `CreateTaskRequest.java`
+This DTO represents the data accepted when a client creates a task.
+
+### Notice that we don't accept id, status, or createdAt from the client.
+
+Our application will generate the ID and creation timestamp, while the task status defaults to TODO. This prevents a client from choosing system-controlled values during creation.
+
+`What do the validation annotations do?`
+- **@NotBlank** rejects a title that is null, empty, or only whitespace.
+- **@Size(max = 150)** limits the title to 150 characters.
+- **@Size(max = 2000)** limits the description to 2,000 characters.
+
+
+## Create `TaskResponse.java`
+
+This DTO defines what our API returns after a task is created or retrieved.
+
+**our API could return a response in json format**
+
+
+
