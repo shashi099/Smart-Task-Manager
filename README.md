@@ -200,5 +200,18 @@ This DTO defines what our API returns after a task is created or retrieved.
 
 **our API could return a response in json format**
 
+# Mapping DTOs to Entities in TaskService Update TaskService 
+Convert incoming API data into a database entity, save it through the repository, and convert the saved entity back into a response DTO.
+
+**The key idea:** DTOs carry API data, entities represent persisted data, and the service coordinates the business logic between them.
+
+- **findAll()** retrieves the task entities.
+- **stream()** allows you to process them as a sequence.
+- **map(this::toResponse)** converts each entity into a DTO.
+- **toList()** collects the converted results into a list.
+  
+So the **service** returns `List<TaskResponse>`, not `List<Task>`
+
+
 
 

@@ -36,7 +36,7 @@ public class Task {
     private LocalDateTime createdAt;
 
     // Required by JPA
-    protected Task() {
+    public Task() {
     }
 
     @PrePersist
