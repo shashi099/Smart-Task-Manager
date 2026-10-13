@@ -212,6 +212,26 @@ Convert incoming API data into a database entity, save it through the repository
   
 So the **service** returns `List<TaskResponse>`, not `List<Task>`
 
+## REST API controller
 
+### Understand each annotation
+`@RestController`
+Tells Spring that this class handles web requests and that returned objects should be written to the HTTP response body, usually as JSON.
 
+`@RequestMapping("/api/tasks")`
+Sets the base URL for all endpoints in this controller.
 
+`@PostMapping`
+Handles HTTP POST requests. We use it to create a task.
+
+`@GetMapping`
+Handles HTTP GET requests. We use it to retrieve all tasks or a specific task.
+
+`@RequestBody`
+Converts the incoming JSON request body into a Java CreateTaskRequest object.
+
+`@Valid`
+Triggers the DTO's validation rules. For example, a blank title should fail the @NotBlank rule before the service creates the task.
+
+`@PathVariable`
+Reads a value from the URL. For /api/tasks/5, the id parameter receives 5.
